@@ -87,9 +87,9 @@
 /**************************************************
  * Reference Power Setting
  **************************************************/
-#define GPU_ACT_REF_POWER               (1307)                /* mW  */
+#define GPU_ACT_REF_POWER               (1550)                /* mW  */
 #define GPU_ACT_REF_FREQ                (1100000)              /* KHz */
-#define GPU_ACT_REF_VOLT                (90000)               /* mV x 100 */
+#define GPU_ACT_REF_VOLT                (98125)               /* mV x 100 */
 #define PTPOD_DISABLE_VOLT              (75000)
 
 // MT6781_PORTING_TODO check below power settings @{

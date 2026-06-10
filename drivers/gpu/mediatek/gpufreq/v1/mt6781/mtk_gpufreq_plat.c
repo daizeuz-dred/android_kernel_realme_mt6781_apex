@@ -2493,11 +2493,9 @@ static enum g_posdiv_power_enum __mt_gpufreq_get_posdiv_power(unsigned int freq)
 	 */
 	enum g_posdiv_power_enum posdiv_power = POSDIV_POWER_4;
 
-	/*
-	 * only use posdiv 4 or 8
-	 * sub-clksrc is MAINPLL_D5(218.4MHz), please make sure don't overclock
-	 */
-	if (freq < POSDIV_4_MIN_FREQ)
+	if (freq > POSDIV_4_MAX_FREQ)
+		posdiv_power = POSDIV_POWER_2;
+	else if (freq < POSDIV_4_MIN_FREQ)
 		posdiv_power = POSDIV_POWER_8;
 
 	return posdiv_power;
@@ -2535,9 +2533,9 @@ static unsigned int __mt_gpufreq_calculate_dds(
 			freq_khz,
 			(1 << posdiv_power));
 
-	/* only use posdiv 4 or 8 */
+	/* support posdiv 2, 4 and 8 */
 	if ((freq_khz >= POSDIV_8_MIN_FREQ) &&
-		(freq_khz <= POSDIV_4_MAX_FREQ)) {
+		(freq_khz <= POSDIV_2_MAX_FREQ)) {
 		dds = (((freq_khz / TO_MHZ_HEAD *
 				(1 << posdiv_power)) << DDS_SHIFT) /
 				MFGPLL_FIN + ROUNDING_VALUE) / TO_MHZ_TAIL;
@@ -2596,6 +2594,9 @@ static void __mt_gpufreq_clock_switch(unsigned int freq_new)
 		 */
 		DRV_WriteReg32(MFGPLL_CON1, pll);
 		udelay(20);
+		/* clear PCW_CHG bit after write */
+		DRV_WriteReg32(MFGPLL_CON1, pll & ~0x80000000);
+		udelay(100);
 		/* mainpll_d5(218.4MHz) to mfgpll_ck */
 		__mt_gpufreq_switch_to_clksrc(CLOCK_MAIN);
 		ged_log_buf_print2(
