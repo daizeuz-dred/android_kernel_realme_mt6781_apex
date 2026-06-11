@@ -66,6 +66,10 @@
 #include <linux/pagemap.h>
 #include <linux/fs.h>
 
+#ifndef rwlock_is_contended
+#define rwlock_is_contended(lock) ((void)(lock), 0)
+#endif
+
 #define ZSPAGE_MAGIC	0x58
 
 /*
