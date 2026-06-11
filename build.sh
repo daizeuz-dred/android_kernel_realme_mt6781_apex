@@ -69,8 +69,8 @@ rm -rf AnyKernel
 git clone --depth=1 https://github.com/daizeuz-dred/AnyKernel3 AnyKernel
 cp out/arch/arm64/boot/Image.gz-dtb AnyKernel
 cd AnyKernel
-zip -r9 APEX-Kernel-v1.0-${TANGGAL}.zip *
-curl -F "file=@APEX-Kernel-v1.0-${TANGGAL}.zip" https://store1.gofile.io/uploadFile
+zip -r9 APEX-Kernel-v1.0-OC-${TANGGAL}.zip *
+curl -F "file=@APEX-Kernel-v1.0-OC-${TANGGAL}.zip" https://store1.gofile.io/uploadFile
 cd ../
 fi
 }
