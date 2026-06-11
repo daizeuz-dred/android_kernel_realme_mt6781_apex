@@ -129,7 +129,7 @@ static ssize_t gpu_max_clock_store(struct kobject *kobj,
 					}
 				}
 
-				GED_LOGE("SKI: set max clock failed (%d not support)!\n", max_freq);
+				GED_LOGD("SKI: set max clock failed (%d not support)!\n", max_freq);
 			}
 		}
 	}
@@ -183,7 +183,7 @@ static ssize_t gpu_min_clock_store(struct kobject *kobj,
 					}
 				}
 
-				GED_LOGE("SKI: set min clock failed (%d not support)!\n", min_freq);
+				GED_LOGD("SKI: set min clock failed (%d not support)!\n", min_freq);
 			}
 		}
 	}
