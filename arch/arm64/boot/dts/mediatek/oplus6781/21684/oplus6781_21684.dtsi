@@ -100,7 +100,7 @@
 	//for oppo chg framework:
 	qcom,pd_disable;
 	qcom,pd_input_current_charger_ma = <3350>;
-	qcom,input_current_charger_ma = <2200>;
+	qcom,input_current_charger_ma = <3000>;
 	qcom,input_current_usb_ma = <650>;
 
 	qcom,vooc_show_ui_soc_decimal;
@@ -117,7 +117,7 @@
 
 	qcom,input_current_camera_ma = <1200>;
 	qcom,input_current_calling_ma = <1500>;
-	qcom,qc_input_current_charger_ma = <2000>;
+	qcom,qc_input_current_charger_ma = <3000>;
 	qcom,ui_soc_decimal_speedmin = <20>;//2A
 	qcom,input_current_cdp_ma = <1800>;
 	qcom,overtemp_bat_decidegc = <350>;
@@ -270,12 +270,12 @@
 
 	qcom,default_iterm_ma = <270>;
 	qcom,default_iterm_ma3 = <270>;
-	qcom,default_temp_normal_fastchg_current_ma = <2200>;
+	qcom,default_temp_normal_fastchg_current_ma = <3350>;
 	qcom,default_normal_vfloat_sw_limit = <4385>;
 	qcom,default_temp_normal_vfloat_mv = <4435>;
 	qcom,default_normal_vfloat_over_sw_limit = <4445>;
 
-	qcom,default_temp_little_cool_fastchg_current_ma = <2200>;
+	qcom,default_temp_little_cool_fastchg_current_ma = <3000>;
 	qcom,default_little_cool_vfloat_sw_limit = <4385>;
 	qcom,default_temp_little_cool_vfloat_mv = <4435>;
 	qcom,default_little_cool_vfloat_over_sw_limit = <4445>;
@@ -375,7 +375,7 @@
 		qcom,vooc_normal_to_little_cool_current = <100>;
 		qcom,vooc_batt_over_high_temp = <510>;
 		qcom,vooc-low-temp = <0>;
-		qcom,vooc-high-temp = <420>;
+		qcom,vooc-high-temp = <450>;
 		qcom,vooc-low-soc = <0>;
 		qcom,vooc-high-soc = <90>;
 		qcom,vooc-normal-high-temp = <430>;
