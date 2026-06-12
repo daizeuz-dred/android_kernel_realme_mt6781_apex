@@ -185,9 +185,9 @@
 	qcom,chargerid_support;
 	qcom,smart_charging_screenoff;
 	qcom,usbtemp_batttemp_gap = <18>;
-	qcom,input_current_charger_ma = <2000>;
-	qcom,pd_input_current_charger_ma = <2000>;
-	qcom,qc_input_current_charger_ma = <2000>;
+	qcom,input_current_charger_ma = <3000>;
+	qcom,pd_input_current_charger_ma = <3000>;
+	qcom,qc_input_current_charger_ma = <3000>;
 	qcom,input_current_usb_ma = <500>;
 
 	qcom,input_current_led_ma = <1200>;
@@ -233,31 +233,31 @@
 	qcom,temp_little_cold_fastchg_current_ma_high = <1100>;
 	qcom,temp_little_cold_fastchg_current_ma_low = <1100>;
 	qcom,temp_little_cold_fastchg_current_ma = <1100>;
-	qcom,pd_temp_little_cold_fastchg_current_ma_high = <1950>;
-	qcom,pd_temp_little_cold_fastchg_current_ma_low = <1350>;
-	qcom,qc_temp_little_cold_fastchg_current_ma_high = <1950>;
-	qcom,qc_temp_little_cold_fastchg_current_ma_low = <1350>;
+	qcom,pd_temp_little_cold_fastchg_current_ma_high = <2500>;
+	qcom,pd_temp_little_cold_fastchg_current_ma_low = <2000>;
+	qcom,qc_temp_little_cold_fastchg_current_ma_high = <2500>;
+	qcom,qc_temp_little_cold_fastchg_current_ma_low = <2000>;
 
 	qcom,cool_bat_decidegc = <50>;  /*5C~12C*/
 	qcom,temp_cool_vfloat_mv = <4435>;
 	qcom,temp_cool_fastchg_current_ma_high = <1100>;
 	qcom,temp_cool_fastchg_current_ma_low = <1100>;
-	qcom,pd_temp_cool_fastchg_current_ma_high = <2000>;
-	qcom,pd_temp_cool_fastchg_current_ma_low = <2000>;
-	qcom,qc_temp_cool_fastchg_current_ma_high = <2000>;
-	qcom,qc_temp_cool_fastchg_current_ma_low = <2000>;
+	qcom,pd_temp_cool_fastchg_current_ma_high = <3000>;
+	qcom,pd_temp_cool_fastchg_current_ma_low = <3000>;
+	qcom,qc_temp_cool_fastchg_current_ma_high = <3000>;
+	qcom,qc_temp_cool_fastchg_current_ma_low = <3000>;
 
 	qcom,little_cool_bat_decidegc = <120>;  /*12C~16C*/
 	qcom,temp_little_cool_vfloat_mv = <4435>;
 	qcom,temp_little_cool_fastchg_current_ma = <1100>;
-	qcom,pd_temp_little_cool_fastchg_current_ma = <2000>;
-	qcom,qc_temp_little_cool_fastchg_current_ma = <2000>;
+	qcom,pd_temp_little_cool_fastchg_current_ma = <3000>;
+	qcom,qc_temp_little_cool_fastchg_current_ma = <3000>;
 
 	qcom,normal_bat_decidegc = <160>;       /*16C~45C*/
 	qcom,temp_normal_vfloat_mv = <4435>;
 	qcom,temp_normal_fastchg_current_ma = <1100>;
-	qcom,pd_temp_normal_fastchg_current_ma = <2000>;
-	qcom,qc_temp_normal_fastchg_current_ma = <2000>;
+	qcom,pd_temp_normal_fastchg_current_ma = <3300>;
+	qcom,qc_temp_normal_fastchg_current_ma = <3300>;
 
 	qcom,warm_bat_decidegc = <450>;         /*45C~53C*/ /*8pin Bat Vooc project need add 3 degree C*/
 	qcom,temp_warm_vfloat_mv = <4130>;
@@ -341,12 +341,12 @@
 	qcom,ffc2_warm_vfloat_over_sw_limit = <4500>;
 
 	qcom,default_iterm_ma = <115>;
-	qcom,default_temp_normal_fastchg_current_ma = <1100>;
+	qcom,default_temp_normal_fastchg_current_ma = <3300>;
 	qcom,default_normal_vfloat_sw_limit = <4385>;
 	qcom,default_temp_normal_vfloat_mv = <4435>;
 	qcom,default_normal_vfloat_over_sw_limit = <4445>;
 
-	qcom,default_temp_little_cool_fastchg_current_ma = <1100>;
+	qcom,default_temp_little_cool_fastchg_current_ma = <3000>;
 	qcom,default_little_cool_vfloat_sw_limit = <4385>;
 	qcom,default_temp_little_cool_vfloat_mv = <4435>;
 	qcom,default_little_cool_vfloat_over_sw_limit = <4445>;
@@ -601,7 +601,7 @@
 		qcom,vooc_reply_mcu_bits = <7>;
 		#include "mediatek/fastchg_fw/fw_svooc_10v6.3a_4.45v_oplus20181_op10_7b.dtsi"
 		qcom,vooc-low-temp = <0>;
-		qcom,vooc-high-temp = <430>;
+		qcom,vooc-high-temp = <450>;
 		qcom,vooc-low-soc = <1>;
 		qcom,vooc-high-soc = <90>;
 		qcom,vooc-little-cool-temp = <160>;
