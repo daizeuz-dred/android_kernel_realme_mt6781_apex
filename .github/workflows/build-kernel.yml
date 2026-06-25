@@ -1,9 +1,9 @@
-name: Build Nebula Prime Kernel (SPACED)
+name: Build APEX Kernel (SPACED)
 
 on:
   push:
     branches:
-      - nebula-prime
+      - apex-v1.0
   workflow_dispatch:
 
 jobs:
@@ -13,8 +13,8 @@ jobs:
     env:
       ARCH: arm64
       SUBARCH: arm64
-      KBUILD_BUILD_USER: HELLINFIX
-      KBUILD_BUILD_HOST: Nebula
+      KBUILD_BUILD_USER: DEEZNUTZ
+      KBUILD_BUILD_HOST: APEX
       USE_CCACHE: 1
       LC_ALL: C
 
@@ -89,7 +89,7 @@ jobs:
       - name: Upload kernel zip
         uses: actions/upload-artifact@v4
         with:
-          name: Nebula-Kernel
+          name: APEX-Kernel-NR-
           path: AnyKernel/*.zip
 
       - name: Send Telegram build status
@@ -99,7 +99,7 @@ jobs:
           to: ${{ secrets.TG_CHAT_ID }}
           token: ${{ secrets.TG_BOT_TOKEN }}
           message: |
-            Nebula Prime Kernel Build
+            APEX Kernel Build
             Device: Realme SPACED (RM6781)
             Branch: ${{ github.ref_name }}
             Commit: ${{ github.sha }}
