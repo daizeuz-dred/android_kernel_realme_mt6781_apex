@@ -6533,7 +6533,7 @@ static int init_parse_dts(struct device *dev, struct touchpanel_data *ts)
     ts->wireless_charger_support = of_property_read_bool(np, "wireless_charger_support");
     ts->headset_pump_support    = of_property_read_bool(np, "headset_pump_support");
     ts->black_gesture_support   = of_property_read_bool(np, "black_gesture_support");
-    ts->black_gesture_indep_support   = of_property_read_bool(np, "black_gesture_indep_support");
+    ts->black_gesture_indep_support   = true;
     ts->single_tap_support      = of_property_read_bool(np, "single_tap_support");
     ts->gesture_test_support    = of_property_read_bool(np, "black_gesture_test_support");
     ts->fw_update_app_support   = of_property_read_bool(np, "fw_update_app_support");
