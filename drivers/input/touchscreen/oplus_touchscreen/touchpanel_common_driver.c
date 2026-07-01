@@ -8338,6 +8338,7 @@ static int fb_notifier_callback(struct notifier_block *self, unsigned long event
                 } else if (ts->tp_suspend_order == LCD_TP_SUSPEND) {
                     if (!ts->gesture_enable && ts->is_incell_panel) {
                         disable_irq_nosync(ts->irq);
+                        ts->irq_disabled = true;
                     }
                 }
 #ifdef CONFIG_DRM_MSM
@@ -8370,6 +8371,7 @@ static int fb_notifier_callback(struct notifier_block *self, unsigned long event
                 } else if (ts->tp_resume_order == LCD_TP_RESUME) {
                     if (!ts->irq_trigger_hdl_support) {
                         disable_irq_nosync(ts->irq);
+                        ts->irq_disabled = true;
                     }
                 }
 #ifdef CONFIG_DRM_MSM
@@ -8381,9 +8383,6 @@ static int fb_notifier_callback(struct notifier_block *self, unsigned long event
 
                 } else if (ts->tp_resume_order == LCD_TP_RESUME) {
                     tp_resume(ts->dev);
-                    if (!ts->irq_trigger_hdl_support) {
-                        enable_irq(ts->irq);
-                    }
                 }
             }
         }

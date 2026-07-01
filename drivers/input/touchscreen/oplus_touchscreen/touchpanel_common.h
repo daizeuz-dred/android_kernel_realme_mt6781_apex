@@ -832,6 +832,7 @@ struct touchpanel_data {
 	bool health_monitor_support;                         /*bspFwUpdate is used*/
 	bool health_monitor_v2_support;
 	bool irq_trigger_hdl_support;                         /*some no-flash ic (such as TD4330) need irq to trigger hdl*/
+	bool irq_disabled;                                     /*track IRQ enable state for balanced enable/disable*/
 	bool in_test_process;                               /*flag whether in test process*/
 	bool noise_modetest_support;                         /*noise mode test is used*/
 	bool lcd_wait_tp_resume_finished_support;           /*lcd will wait tp resume finished*/
