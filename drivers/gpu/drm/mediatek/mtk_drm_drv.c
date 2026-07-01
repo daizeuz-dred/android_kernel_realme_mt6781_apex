@@ -2549,6 +2549,9 @@ void mtk_drm_top_clk_disable_unprepare(struct drm_device *drm)
 			spin_lock_irqsave(&top_clk_lock, flags);
 		}
 		priv->power_state = false;
+	} else {
+		spin_unlock_irqrestore(&top_clk_lock, flags);
+		return;
 	}
 	spin_unlock_irqrestore(&top_clk_lock, flags);
 
