@@ -1234,7 +1234,7 @@ static int mt6358_regulator_probe(struct platform_device *pdev)
 			continue;
 		ret = devm_request_threaded_irq(&pdev->dev, mt_regulators->irq,
 						NULL, mt6358_oc_irq,
-						IRQF_TRIGGER_HIGH,
+						IRQF_TRIGGER_HIGH | IRQF_SHARED,
 						mt_regulators->desc.name,
 						rdev);
 		if (ret) {

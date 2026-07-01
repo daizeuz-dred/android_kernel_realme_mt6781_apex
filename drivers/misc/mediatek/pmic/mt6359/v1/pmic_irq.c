@@ -109,7 +109,7 @@ void pmic_enable_interrupt(enum PMIC_IRQ_ENUM intNo, unsigned int en, char *str)
 	if (en == 1) {
 		if (!(pmic_cb->has_requested)) {
 			ret = devm_request_threaded_irq(pmic_dev, irq, NULL,
-				legacy_pmic_int_handler, IRQF_TRIGGER_HIGH,
+				legacy_pmic_int_handler, IRQF_TRIGGER_HIGH | IRQF_SHARED,
 				name, pmic_cb);
 			if (ret < 0)
 				pr_notice(PMICTAG "[%s] request %s irq fail\n",
