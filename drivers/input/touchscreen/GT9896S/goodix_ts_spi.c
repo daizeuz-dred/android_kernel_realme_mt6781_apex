@@ -487,26 +487,14 @@ exit:
 	return ret;
 }
 
+int gt9896s_hw_reset(struct gt9896s_ts_device *dev);
+
 /* confirm current device is gt9896s or not.
  * If confirmed 0 will return.
  */
 static int gt9896s_ts_dev_prepare(struct gt9896s_ts_device *ts_dev)
 {
-	int ret = 0;
-
-	/* reset ic */
-	gpio_direction_output(ts_dev->board_data.reset_gpio, 0);
-	udelay(2000);
-	gpio_direction_output(ts_dev->board_data.reset_gpio, 1);
-	msleep(50);
-
-	ts_info("ts_dev->ic_type = IC_TYPE_YELLOWSTONE_SPI");
-	/* set spi args & remove GIO hold for ES_CHIP*/
-	ret = gt9896s_reset_ic_init(ts_dev);
-	if (ret)
-		ts_err("reset ic init failed, ret %d", ret);
-
-	return ret;
+	return gt9896s_hw_reset(ts_dev);
 }
 
 static void gt9896s_cmd_init(struct gt9896s_ts_device *dev,
@@ -1379,6 +1367,7 @@ static int gt9896s_spi_probe(struct spi_device *spi)
 		goto err_spi_buf;
 	}
 	ts_device->name = "Goodix Touch GT9896S";
+	ts_device->ic_type = IC_TYPE_YELLOWSTONE_SPI;
 	ts_device->spi_dev = spi;
 	ts_device->dev = &spi->dev;
 	ts_device->hw_ops = &hw_spi_ops;
