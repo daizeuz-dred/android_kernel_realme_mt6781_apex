@@ -66,7 +66,7 @@ echo  " Failed to compile zImage, fix the errors first "
 else
 echo -e " Build succesful, generating flashable zip now "
 rm -rf AnyKernel
-git clone --depth=1 https://github.com/daizeuz-dred/AnyKernel3 -b apex AnyKernel
+git clone --depth=1 https://github.com/daizeuz-dred/AnyKernel3 -b apex-v2-ksun-susfs AnyKernel
 cp out/arch/arm64/boot/Image.gz-dtb AnyKernel
 cd AnyKernel
 zip -r9 APEX-Kernel-v1.0-${TANGGAL}.zip *
