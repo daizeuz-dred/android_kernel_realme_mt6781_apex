@@ -15,8 +15,8 @@
 
 &mt6370_pmu {
 	mt6370_chg: charger {
-		ichg = <2200000>;	/* uA */
-		mivr = <4500000>;	/* uV */
+		ichg = <3350000>;	/* uA */
+		mivr = <4200000>;	/* uV */
 		cv = <4435000>;		/* uA */
 		safety_timer = <20>;	/* hour */
 		ircmp_resistor = <0>;	/* uohm */
@@ -30,8 +30,8 @@
 		track,fast_chg_break_t_thd = <1400>;
 		track,general_chg_break_t_thd = <2200>;
 		track,voocphy_type = <0>;
-		track,wired_max_power = <18000>;
-		track,wired_fast_chg_scheme = <6>;
+		track,wired_max_power = <33000>;
+		track,wired_fast_chg_scheme = <4>;
 	};
 };
 
@@ -59,7 +59,7 @@
 
 	//for oppo chg framework:
 	qcom,pd_input_current_charger_ma = <3350>;
-	qcom,input_current_charger_ma = <2200>;
+	qcom,input_current_charger_ma = <3350>;
 	qcom,input_current_usb_ma = <650>;
 
 	qcom,vbatt_pdqc_to_9v_thr = <4200>;
@@ -74,7 +74,7 @@
 
 	qcom,input_current_camera_ma = <1200>;
 	qcom,input_current_calling_ma = <1500>;
-	qcom,qc_input_current_charger_ma = <2000>;
+	qcom,qc_input_current_charger_ma = <3350>;
 	qcom,ui_soc_decimal_speedmin = <20>;//2A
 	qcom,input_current_cdp_ma = <1800>;
 	qcom,overtemp_bat_decidegc = <350>;
@@ -106,12 +106,12 @@
 
 	qcom,cool_bat_decidegc = <50>;	/* 5C ~ 12C */
 	qcom,temp_cool_vfloat_mv = <4435>;
-	qcom,temp_cool_fastchg_current_ma_high = <2200>;
-	qcom,temp_cool_fastchg_current_ma_low = <2200>;
-	qcom,pd_temp_cool_fastchg_current_ma_high = <2300>;
-	qcom,pd_temp_cool_fastchg_current_ma_low = <2300>;
-	qcom,qc_temp_cool_fastchg_current_ma_high = <2300>;
-	qcom,qc_temp_cool_fastchg_current_ma_low = <2300>;
+	qcom,temp_cool_fastchg_current_ma_high = <3350>;
+	qcom,temp_cool_fastchg_current_ma_low = <3350>;
+	qcom,pd_temp_cool_fastchg_current_ma_high = <3350>;
+	qcom,pd_temp_cool_fastchg_current_ma_low = <3350>;
+	qcom,qc_temp_cool_fastchg_current_ma_high = <3350>;
+	qcom,qc_temp_cool_fastchg_current_ma_low = <3350>;
 
 	qcom,little_cool_bat_decidegc = <120>;	/* 12C ~ 16C */
 	qcom,temp_little_cool_vfloat_mv = <4435>;
@@ -124,7 +124,7 @@
 	qcom,qc_temp_little_cool_fastchg_current_ma_low = <2300>;
 
 	qcom,normal_bat_decidegc = <160>;	/* 16C ~ 45C */
-	qcom,temp_normal_fastchg_current_ma = <2200>;
+	qcom,temp_normal_fastchg_current_ma = <3350>;
 	qcom,temp_normal_vfloat_mv = <4435>;
 	qcom,pd_temp_normal_fastchg_current_ma = <3350>;
 	qcom,qc_temp_normal_fastchg_current_ma = <3350>;
@@ -219,7 +219,7 @@
 	qcom,ffc_normal_vfloat_over_sw_limit = <4550>;
 
 	qcom,default_iterm_ma = <270>;
-	qcom,default_temp_normal_fastchg_current_ma = <2200>;
+	qcom,default_temp_normal_fastchg_current_ma = <3350>;
 	qcom,default_normal_vfloat_sw_limit = <4385>;
 	qcom,default_temp_normal_vfloat_mv = <4435>;
 	qcom,default_normal_vfloat_over_sw_limit = <4445>;
