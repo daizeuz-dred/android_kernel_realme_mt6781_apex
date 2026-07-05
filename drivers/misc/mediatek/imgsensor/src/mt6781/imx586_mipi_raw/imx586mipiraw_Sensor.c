@@ -233,7 +233,7 @@ static struct imgsensor_info_struct imgsensor_info = {
 	.ae_shut_delay_frame = 0,
 	.ae_sensor_gain_delay_frame = 0,
 	.ae_ispGain_delay_frame = 2,	/* isp gain delay frame for AE cycle */
-	.ihdr_support = 0,	/* 1, support; 0,not support */
+	.ihdr_support = 1,	/* 1, support; 0,not support */
 	.ihdr_le_firstline = 0,	/* 1,le first ; 0, se first */
 	.temperature_support = 1,/* 1, support; 0,not support */
 	.sensor_mode_num = 20,	/* support sensor mode num */
@@ -735,11 +735,10 @@ static void write_shutter(kal_uint32 shutter)
  *************************************************************************/
 static void set_shutter(kal_uint32 shutter)
 {
-	unsigned long flags;
 
-	spin_lock_irqsave(&imgsensor_drv_lock, flags);
+	spin_lock(&imgsensor_drv_lock);
 	imgsensor.shutter = shutter;
-	spin_unlock_irqrestore(&imgsensor_drv_lock, flags);
+	spin_unlock(&imgsensor_drv_lock);
 
 	write_shutter(shutter);
 } /* set_shutter */
@@ -901,25 +900,12 @@ static kal_uint16 set_gain(kal_uint16 gain)
 
 static kal_uint32 imx586_awb_gain(struct SET_SENSOR_AWB_GAIN *pSetSensorAWB)
 {
-	#if 0
 	UINT32 rgain_32, grgain_32, gbgain_32, bgain_32;
 
 	grgain_32 = (pSetSensorAWB->ABS_GAIN_GR + 1) >> 1;
 	rgain_32 = (pSetSensorAWB->ABS_GAIN_R + 1) >> 1;
 	bgain_32 = (pSetSensorAWB->ABS_GAIN_B + 1) >> 1;
 	gbgain_32 = (pSetSensorAWB->ABS_GAIN_GB + 1) >> 1;
-	pr_debug("[%s] ABS_GAIN_GR:%d, grgain_32:%d\n",
-		__func__,
-		pSetSensorAWB->ABS_GAIN_GR, grgain_32);
-	pr_debug("[%s] ABS_GAIN_R:%d, rgain_32:%d\n",
-		__func__,
-		pSetSensorAWB->ABS_GAIN_R, rgain_32);
-	pr_debug("[%s] ABS_GAIN_B:%d, bgain_32:%d\n",
-		__func__,
-		pSetSensorAWB->ABS_GAIN_B, bgain_32);
-	pr_debug("[%s] ABS_GAIN_GB:%d, gbgain_32:%d\n",
-		__func__,
-		pSetSensorAWB->ABS_GAIN_GB, gbgain_32);
 
 	write_cmos_sensor_8(0x0b8e, (grgain_32 >> 8) & 0xFF);
 	write_cmos_sensor_8(0x0b8f, grgain_32 & 0xFF);
@@ -929,18 +915,6 @@ static kal_uint32 imx586_awb_gain(struct SET_SENSOR_AWB_GAIN *pSetSensorAWB)
 	write_cmos_sensor_8(0x0b93, bgain_32 & 0xFF);
 	write_cmos_sensor_8(0x0b94, (gbgain_32 >> 8) & 0xFF);
 	write_cmos_sensor_8(0x0b95, gbgain_32 & 0xFF);
-
-	imx586_awb_gain_table[1]  = (grgain_32 >> 8) & 0xFF;
-	imx586_awb_gain_table[3]  = grgain_32 & 0xFF;
-	imx586_awb_gain_table[5]  = (rgain_32 >> 8) & 0xFF;
-	imx586_awb_gain_table[7]  = rgain_32 & 0xFF;
-	imx586_awb_gain_table[9]  = (bgain_32 >> 8) & 0xFF;
-	imx586_awb_gain_table[11] = bgain_32 & 0xFF;
-	imx586_awb_gain_table[13] = (gbgain_32 >> 8) & 0xFF;
-	imx586_awb_gain_table[15] = gbgain_32 & 0xFF;
-	imx586_table_write_cmos_sensor(imx586_awb_gain_table,
-		sizeof(imx586_awb_gain_table)/sizeof(kal_uint16));
-	#endif
 
 	return ERROR_NONE;
 }
@@ -993,7 +967,7 @@ static void imx586_set_lsc_reg_setting(
 	write_cmos_sensor_8(0x0B00, 0x01); /*lsc enable*/
 	write_cmos_sensor_8(0x9014, 0x01);
 	write_cmos_sensor_8(0x4439, 0x01);
-	mdelay(1);
+	usleep_range(1000, 2000);
 	pr_debug("Addr 0xB870, 0x380D Value:0x%x %x\n",
 		read_cmos_sensor_8(0xB870), read_cmos_sensor_8(0x380D));
 	/*define Knot point, 2'b01:u3.7*/
@@ -1022,7 +996,7 @@ static void check_stream_is_on(void)
 			break;
 		}
 		pr_debug("IMX586 stream is not on %d \\n", framecnt);
-		mdelay(1);
+		usleep_range(1000, 2000);
 	}
 }
 
@@ -3324,7 +3298,6 @@ static kal_uint32 get_imgsensor_id(UINT32 *sensor_id)
 			if (*sensor_id == imgsensor_info.sensor_id) {
 				pr_debug("i2c write id: 0x%x, sensor id: 0x%x\n",
 					imgsensor.i2c_write_id, *sensor_id);
-				read_sensor_Cali();
 				return ERROR_NONE;
 			}
 
@@ -3399,6 +3372,7 @@ static kal_uint32 open(void)
 	/* initail sequence write in  */
 
 	sensor_init();
+	read_sensor_Cali();
 
 	spin_lock(&imgsensor_drv_lock);
 
@@ -4894,7 +4868,7 @@ static kal_uint32 feature_control(MSDK_SENSOR_FEATURE_ENUM feature_id,
 	case SENSOR_FEATURE_GET_BINNING_TYPE:
 		switch (*(feature_data + 1)) {
 		case MSDK_SCENARIO_ID_CUSTOM3:
-			*feature_return_para_32 = 1; /*BINNING_NONE*/
+			*feature_return_para_32 = 0; /*BINNING_NONE*/
 			break;
 		case MSDK_SCENARIO_ID_CAMERA_CAPTURE_JPEG:
 		case MSDK_SCENARIO_ID_VIDEO_PREVIEW:

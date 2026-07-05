@@ -25,7 +25,7 @@
 #include "imx586mipiraw_Sensor.h"
 
 
-#define Sleep(ms) mdelay(ms)
+#define Sleep(ms) msleep(ms)
 
 #define IMX586_EEPROM_READ_ID  0xA0
 #define IMX586_EEPROM_WRITE_ID 0xA1
