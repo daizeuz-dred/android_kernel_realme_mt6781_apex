@@ -1497,8 +1497,8 @@ int oplus_mt6370_charging_current_write_fast(int chg_curr)
 				chg_debug("set sub fast charge current:%d fail\n", slave_cur);
 			}
 		} else {
-			if (chg_curr >= 2300) {
-				chg_curr = 2300;
+			if (chg_curr >= 3350) {
+				chg_curr = 3350;
 			}
 
 			chg_err("set fast charge current:%d main_cur:%d\n", chg_curr, chg_curr);
@@ -3778,12 +3778,6 @@ static void mt6370_step_charging_work(struct work_struct *work)
 		return;
 	}
 
-	if (is_spaceb_hc_project() == 2) {/*18w*/
-		pr_err("%s, SPACE-B 18w 5v2A\n", __func__);
-		cancel_delayed_work(&pinfo->step_charging_work);
-		return;
-	}
-
 	if (chip->tbatt_status == BATTERY_STATUS__NORMAL) {
 		tbat_normal_current = oplus_chg_get_tbatt_normal_charging_current(chip);
 
@@ -3945,8 +3939,8 @@ struct oplus_chg_chip* oplus_get_oplus_chip(void)
 }
 
 #if defined(OPLUS_FEATURE_CHG_BASIC) && defined(CONFIG_OPLUS_CHARGER_MTK6781)
-/*  SpaceB high configuration return2 9V2A*/
-/*  SpaceB low configuration return1 11V3A*/
+/*  SpaceB high configuration return1 11V3A (33W)*/
+/*  SpaceB low configuration return2 9V2A (18W)*/
 int is_spaceb_hc_project(void)
 {
 	int ret = 0;
