@@ -662,6 +662,8 @@ def parse_dt_entries(global_args, arg_list):
         params['version'] = global_args.version
         params['dt_offset'] = 0
         params['dt_size'] = os.fstat(params['dt_file'].fileno()).st_size
+        if params['id'] == global_args.global_id:
+            params['id'] = str(idx)
         dt_entries.append(DtEntry(**params))
 
     return dt_entries
