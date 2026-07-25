@@ -41,6 +41,7 @@
 };
 
 &mt6370_pmu {
+	support_ffc;
 	mt6370_chg: charger {
 		ichg = <2200000>;	/* uA */
 		mivr = <4200000>;	/* uV */
@@ -48,21 +49,21 @@
 		safety_timer = <20>;	/* hour */
 		ircmp_resistor = <0>;	/* uohm */
 		ircmp_vclamp = <0>;		/* uV */
+		enable_charging_forbid_set_ichg;
 	};
 };
 
 &odm {
-	mediatek_phy_tuning: mediatek_phy_tuning {
-		phy_tuning {
-			compatible = "mediatek,phy_tuning";
-			eye-vrt = <7>;
-			eye-term = <7>;
-			eye-rev6 = <3>;
-
-			host-eye-vrt = <2>;
-			host-eye-term = <2>;
-			host-eye-rev6 = <2>;
-		};
+	phy_tuning {
+		compatible = "mediatek,phy_tuning";
+		eye-vrt = <7>;
+		eye-term = <7>;
+		eye-rev6 = <3>;
+		eye-disc = <11>;
+		host-eye-vrt = <2>;
+		host-eye-term = <2>;
+		host-eye-rev6 = <2>;
+		host-eye-disc = <11>;
 	};
 
 	oplus,track-charge {
@@ -100,7 +101,7 @@
 	//for oppo chg framework:
 	qcom,pd_disable;
 	qcom,pd_input_current_charger_ma = <3350>;
-	qcom,input_current_charger_ma = <3000>;
+	qcom,input_current_charger_ma = <2200>;
 	qcom,input_current_usb_ma = <650>;
 
 	qcom,vooc_show_ui_soc_decimal;
@@ -117,7 +118,7 @@
 
 	qcom,input_current_camera_ma = <1200>;
 	qcom,input_current_calling_ma = <1500>;
-	qcom,qc_input_current_charger_ma = <3000>;
+	qcom,qc_input_current_charger_ma = <2000>;
 	qcom,ui_soc_decimal_speedmin = <20>;//2A
 	qcom,input_current_cdp_ma = <1800>;
 	qcom,overtemp_bat_decidegc = <350>;
@@ -270,12 +271,12 @@
 
 	qcom,default_iterm_ma = <270>;
 	qcom,default_iterm_ma3 = <270>;
-	qcom,default_temp_normal_fastchg_current_ma = <3350>;
+	qcom,default_temp_normal_fastchg_current_ma = <2200>;
 	qcom,default_normal_vfloat_sw_limit = <4385>;
 	qcom,default_temp_normal_vfloat_mv = <4435>;
 	qcom,default_normal_vfloat_over_sw_limit = <4445>;
 
-	qcom,default_temp_little_cool_fastchg_current_ma = <3000>;
+	qcom,default_temp_little_cool_fastchg_current_ma = <2200>;
 	qcom,default_little_cool_vfloat_sw_limit = <4385>;
 	qcom,default_temp_little_cool_vfloat_mv = <4435>;
 	qcom,default_little_cool_vfloat_over_sw_limit = <4445>;
@@ -373,12 +374,11 @@
 		qcom,vooc_normal_low_temp = <250>;
 		qcom,vooc_strategy_normal_current = <100>;
 		qcom,vooc_normal_to_little_cool_current = <100>;
-		qcom,vooc_batt_over_high_temp = <510>;
+		qcom,vooc_batt_over_high_temp = <430>;
 		qcom,vooc-low-temp = <0>;
-		qcom,vooc-high-temp = <450>;
+		qcom,vooc-high-temp = <420>;
 		qcom,vooc-low-soc = <0>;
 		qcom,vooc-high-soc = <90>;
-		qcom,vooc-normal-high-temp = <430>;
 		qcom,vooc-warm-allow-vol = <4000>;
 		qcom,vooc-warm-allow-soc = <50>;
 
