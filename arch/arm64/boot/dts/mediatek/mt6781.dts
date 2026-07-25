@@ -1868,7 +1868,6 @@
 
 	apdma: dma-controller@10200d80 {
 		compatible = "mediatek,mt6577-uart-dma";
-		status = "disabled";
 		reg = <0 0x10200d80 0 0x80>,
 		      <0 0x10200e00 0 0x80>,
 		      <0 0x10200e80 0 0x80>,
@@ -1886,7 +1885,6 @@
 
 	apuart0: serial@11002000 {
 		compatible = "mediatek,mt6577-uart";
-		status = "disabled";
 		reg = <0 0x11002000 0 0x1000>;
 		interrupts = <GIC_SPI 112 IRQ_TYPE_LEVEL_HIGH>;
 		clocks = <&clk26m>, <&infracfg_ao INFRACFG_AO_UART0_CG>;
@@ -1898,7 +1896,6 @@
 
 	apuart1: serial@11003000 {
 		compatible = "mediatek,mt6577-uart";
-		status = "disabled";
 		reg = <0 0x11003000 0 0x1000>;
 		interrupts = <GIC_SPI 113 IRQ_TYPE_LEVEL_HIGH>;
 		clocks = <&clk26m>, <&infracfg_ao INFRACFG_AO_UART1_CG>;
@@ -2292,7 +2289,6 @@
 
 	ap_uart2@11018000 {
 		compatible = "mediatek,ap_uart2";
-		status = "disabled";
 		reg = <0 0x11018000 0 0x1000>;
 	};
 
@@ -4203,6 +4199,16 @@
 			"MT_CG_VDEC";
 	};
 
+	vdec_gcon_clk: vdec_gcon@16010000 {
+		compatible = "mediatek,vdec_gcon";
+		reg = <0 0x16010000 0 0x8000>;
+	};
+
+	vdec_gcon@16018000 {
+		compatible = "mediatek,vdec_gcon";
+		reg = <0 0x16018000 0 0x8000>;
+	};
+
 	venc_gcon: venc_gcon@17000000 {
 		compatible = "mediatek,venc_gcon",
 				"mediatek,mt6833-venc_gcon", "syscon";
@@ -4233,6 +4239,12 @@
 			<&venc_gcon VENC_GCON_JPGENC>;
 		clock-names = "scp-venc", "venc-set1", "venc-set2";
 		mediatek,smi-id = <7>;
+	};
+
+	venc@17020000 {
+		compatible = "mediatek,venc";
+		reg = <0 0x17020000 0 0x10000>;
+		interrupts = <GIC_SPI 243 IRQ_TYPE_LEVEL_HIGH>;
 	};
 
 	jpgenc@17030000 {
@@ -4984,6 +4996,7 @@
 	rt-pd-manager {
 		compatible = "mediatek,rt-pd-manager";
 	};
+
 };
 
 &i2c6 {
